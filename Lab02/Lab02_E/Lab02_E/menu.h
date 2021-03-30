@@ -32,6 +32,7 @@ void XuLyMenu(int menu, NhanVien a[MAX], int& n)
 	char ho[8];
 	char ten[8];
 	char diachi[15];
+	char maNV[8];
 	unsigned int namsinh;
 	double luong;
 	int result;
@@ -134,6 +135,11 @@ void XuLyMenu(int menu, NhanVien a[MAX], int& n)
 	case 8:
 		system("cls");
 		cout << "\n8. Tim kiem nhi phan theo ma nhan vien\n";
+		cout << "\nDanh sach nhan vien hien hanh...\n";
+		XuatDSNV(a, n);
+		cout << "\nNhap ma nhan vien cua nhan vien: ";
+		cin >> maNV;
+		LinearSearch_MaNV(a, n, maNV);
 		break;
 	default:
 		break;

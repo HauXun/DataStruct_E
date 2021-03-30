@@ -165,3 +165,107 @@ void TimNhanVien_Luong_NamSinh(NhanVien a[MAX], int n, double luong, int namsinh
 				XuatNhanVien(a[i]);
 	}
 }
+
+int KiemTraDayTang(NhanVien a[MAX], int n)
+{
+	int result = 1;
+	for (int i = 0; i < n; i++)
+	{
+		if (_strcmpi(a[i].maNV, a[i + 1].maNV) > 0)
+		{
+			result = 0;
+			break;
+		}
+	}
+	return result;
+}
+
+int KiemTraDayGiam(NhanVien a[MAX], int n)
+{
+	int result = 1;
+	for (int i = 0; i < n; i++)
+	{
+		if (_strcmpi(a[i].maNV, a[i + 1].maNV) < 0)
+		{
+			result = 0;
+			break;
+		}
+	}
+	return result;
+}
+
+int LinearSearch_MaNV_Tang(NhanVien a[MAX], int n, char maNV[8])
+{
+	int result = -1, middle, left = 0, right = n - 1;
+	do
+	{
+		middle = (left + right) / 2;
+		if (_strcmpi(a[middle].maNV, maNV) == 0)
+		{
+			result = middle;
+			break;
+		}
+		else
+			if (_strcmpi(a[middle].maNV, maNV) > 0)
+				right = middle - 1;
+			else
+				left = middle + 1;
+	} while (left <= right);
+	return result;
+}
+
+int LinearSearch_MaNV_Giam(NhanVien a[MAX], int n, char maNV[8])
+{
+	int result = -1, middle, left = 0, right = n - 1;
+	do
+	{
+		middle = (left + right) / 2;
+		if (_strcmpi(a[middle].maNV, maNV) == 0)
+		{
+			result = middle;
+			break;
+		}
+		else
+			if (_strcmpi(a[middle].maNV, maNV) < 0)
+				left = middle + 1;
+			else
+				right = middle - 1;
+	} while (left <= right);
+	return result;
+}
+
+void TimNhanVien_MaNV_LinearSearch(NhanVien a[MAX], int n, int result, char maNV[8])
+{
+	if (result == -1)
+	{
+		cout << "\nKhong tim thay nhan vien nao trong danh sach co ma nhan vien la " << maNV;
+		return;
+	}
+	else
+	{
+		cout << "\nThong tin nhan vien co ma nhan vien la " << maNV;
+		XuatTieuDe();
+		XuatNhanVien(a[result]);
+	}
+}
+
+void LinearSearch_MaNV(NhanVien a[MAX], int n, char maNV[8])
+{
+	int result;
+	if (!KiemTraDayTang(a, n) && !KiemTraDayGiam(a, n))
+	{
+		cout << "\nTruong ma so nhan vien khong dong deu...";
+		cout << "\nKhong the su dung thuat giai tim kiem nhi phan...!";
+		return;
+	}
+	if (KiemTraDayTang(a, n))
+	{
+		result = LinearSearch_MaNV_Tang(a, n, maNV);
+		TimNhanVien_MaNV_LinearSearch(a, n, result, maNV);
+	}
+	if (KiemTraDayGiam(a, n))
+	{
+		result = LinearSearch_MaNV_Giam(a, n, maNV);
+		TimNhanVien_MaNV_LinearSearch(a, n, result, maNV);
+	}
+}
