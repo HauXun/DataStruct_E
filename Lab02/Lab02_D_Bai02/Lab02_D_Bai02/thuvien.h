@@ -112,9 +112,8 @@ void Tim_TheoTen(char ten[10], SinhVien a[MAX], int n)
 		cout << "\nThong tin sinh vien trong danh sach co ten " << ten;
 		cout << endl;
 		XuatTieuDe(a, n);
-		for (int i = 0; i < n; i++)
-			if (_strcmpi(a[i].ten, ten) == 0)
-				XuatNhanVien(a[i]);
+		XuatNhanVien(a[result]);
+		cout << "\n";
 	}
 }
 
@@ -135,9 +134,8 @@ void Tim_TheoHo(char hoSV[10], SinhVien a[MAX], int n)
 		cout << "\nThong tin sinh vien trong danh sach co ho " << hoSV;
 		cout << endl;
 		XuatTieuDe(a, n);
-		for (int i = 0; i < n; i++)
-			if (_strcmpi(a[i].hoSV, hoSV) == 0)
-				XuatNhanVien(a[i]);
+		XuatNhanVien(a[result]);
+		cout << "\n";
 	}
 }
 
@@ -158,9 +156,8 @@ void Tim_TheoLop(char lop[10], SinhVien a[MAX], int n)
 		cout << "\nThong tin sinh vien trong danh sach thuoc lop " << lop;
 		cout << endl;
 		XuatTieuDe(a, n);
-		for (int i = 0; i < n; i++)
-			if (_strcmpi(a[i].lop, lop) == 0)
-				XuatNhanVien(a[i]);
+		XuatNhanVien(a[result]);
+		cout << "\n";
 	}
 }
 
@@ -181,9 +178,8 @@ void Tim_TheoDTB(double dtb, SinhVien a[MAX], int n)
 		cout << "\nThong tin sinh vien trong danh sach co diem trung binh " << dtb;
 		cout << endl;
 		XuatTieuDe(a, n);
-		for (int i = 0; i < n; i++)
-			if (a[i].dtb >= dtb)
-				XuatNhanVien(a[i]);
+		XuatNhanVien(a[result]);
+		cout << "\n";
 	}
 }
 

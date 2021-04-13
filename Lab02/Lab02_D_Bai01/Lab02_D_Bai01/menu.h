@@ -94,15 +94,7 @@ void XuLyMenu(int menu, int a[MAX], int& n)
 		cout << "\nMang du lieu ban dau...\n";
 		cout << "\nNhap x: ";
 		cin >> x;
-		if (LinearSearch_Index(a, n, x) == -1)
-			cout << endl << x << " Khong co trong mang";
-		else
-		{
-			cout << endl << x << " Xuat hien trong mang tai cac vi tri...\n";
-			for (int i = 0; i < n; i++)
-				if (a[i] == x)
-					cout << i << "\t";
-		}
+		LinearSearch_Index(a, n, x);
 		cout << endl;
 		break;
 	}

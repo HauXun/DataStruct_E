@@ -58,6 +58,17 @@ int LinearSearch_Index(int a[MAX], int n, int x)
 	int result = -1;
 	for (int i = 0; i < n; i++)
 		if (a[i] == x)
-			return 1;
+		{
+			result =  -1;
+		}
+	if (result == -1)
+		cout << endl << x << " khong co trong a";
+	else
+	{
+		cout << endl << x << " xuat hien trong a tai cac vi tri :\n";
+		for (int i = 0; i < n; i++)
+			if (a[i] == x)
+				cout << i << '\t';
+	}
 	return result;
 }
