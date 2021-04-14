@@ -15,23 +15,23 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Lab01_E_Bai01.cpp">
+    <ClCompile Include="Lab03_E_Bai01.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="menu.h">
+    <ClInclude Include="thuvien.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="thuvien.h">
+    <ClInclude Include="menu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="text1.txt">
+    <Text Include="text.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="text2.txt">
+    <Text Include="text1.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

@@ -49,10 +49,10 @@ void Selection_Left(DaySo a, int n)
 void Selection_Right(DaySo a, int n)
 {
 	int csMax;
-	for (int i = n - 1; i >= 1; i--)
+	for (int i = n - 1; i >= 0; i--)
 	{
 		csMax = i;
-		for (int j = i; j >= 0; j--)
+		for (int j = i; j >= 1; j--)
 		{
 			if (a[csMax] < a[j])
 				csMax = j;
@@ -83,7 +83,7 @@ void Selection_Right_Left(DaySo a, int n)
 		}
 		else
 		{
-			swap(a[csMax], a[n - 1 -i]);
+			swap(a[csMax], a[n - 1 - i]);
 			swap(a[csMin], a[i]);
 		}
 	}
@@ -128,6 +128,7 @@ void Insertion_Right(DaySo a, int n)
 				}
 				a[j] = x;
 			}
+			XuatMang(a, n);
 		}
 	}
 }
