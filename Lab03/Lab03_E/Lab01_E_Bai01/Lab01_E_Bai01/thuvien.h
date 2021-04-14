@@ -52,7 +52,7 @@ void Selection_Right(DaySo a, int n)
 	for (int i = n - 1; i >= 1; i--)
 	{
 		csMax = i;
-		for (int j = n - 1; j >= 0; j--)
+		for (int j = i; j >= 0; j--)
 		{
 			if (a[csMax] < a[j])
 				csMax = j;
