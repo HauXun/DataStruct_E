@@ -68,18 +68,38 @@ void XuLyMenu(int menu, LISTLL& listLL, LISTCC& listCC)
 		system("cls");
 		cout << "\n4. Sap xep bang luong nhan vien - InsertionSort";
 		cout << "\n\tBANG LUONG NHAN VIEN TRUOC KHI SAP XEP";
-		XuatBangLuongNV(listLL);
+		Copy(listLL2, listLL);
+		XuatBangLuongNV(listLL2);
 		cout << "\n\tBANG LUONG NHAN VIEN SAU KHI SAP XEP";
-		InsertionSort(listLL);
-		XuatBangLuongNV(listLL);
+		InsertionSort(listLL2);
+		XuatBangLuongNV(listLL2);
 		break;
 	case 5:
 		system("cls");
 		cout << "\n5. Sap xep bang luong nhan vien - BubbleSort";
+		cout << "\n\tBANG LUONG NHAN VIEN TRUOC KHI SAP XEP";
+		Copy(listLL2, listLL);
+		XuatBangLuongNV(listLL2);
+		cout << "\n\tBANG LUONG NHAN VIEN SAU KHI SAP XEP";
+		BubbleSort(listLL2);
+		XuatBangLuongNV(listLL2);
 		break;
 	case 6:
 		system("cls");
 		cout << "\n6. Sap xep bang luong nhan vien - MergeSort";
+		cout << "\n\tBANG LUONG NHAN VIEN TRUOC KHI SAP XEP";
+		Copy(listLL2, listLL);
+		XuatBangLuongNV(listLL2);
+		cout << "\n\tBANG LUONG NHAN VIEN SAU KHI SAP XEP";
+		NODELL* head;
+		LLNV x;
+		for (NODELL* i = listLL.pHead; i != NULL; i = i->pNext)
+		{
+			x = i->data;
+			Push(&head, x);
+		}
+		MergeSort(&head);
+		XuatBangLuongNV(listLL2);
 		break;
 	case 7:
 		system("cls");
