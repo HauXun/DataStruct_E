@@ -22,6 +22,7 @@ struct NODELL
 	LLNV data;
 	NODELL* pNext;
 };
+typedef struct NODELL* List;
 
 struct LISTLL
 {
@@ -51,65 +52,84 @@ void CreatListCC(LISTCC& list)
 	list.pHead = list.pTail = NULL;
 }
 
-NODELL* GetNodeLL(LLNV x)
+NODELL* GetNODELL(LLNV x)
 {
-	NODELL* pNode = new NODELL;
-	if (pNode == NULL)
-		return NULL;
-	pNode->data = x;
-	pNode->pNext = NULL;
+	NODELL* pNODE = new NODELL;
+	if (!pNODE)
+		exit(1);
+	pNODE->data = x;
+	pNODE->pNext = NULL;
+	return pNODE;
 }
 
-NODECC* GetNodeCC(CCNV x)
+NODECC* GetNODECC(CCNV x)
 {
-	NODECC* pNode = new NODECC;
-	if (pNode == NULL)
-		return NULL;
-	pNode->data = x;
-	pNode->pNext = NULL;
+	NODECC* pNODE = new NODECC;
+	if (!pNODE)
+		exit(1);
+	pNODE->data = x;
+	pNODE->pNext = NULL;
+	return pNODE;
 }
 
-void AddHeadLL(LISTLL& list, NODELL* pNode)
+void AddHeadLL(LISTLL& list, NODELL* pNODE)
 {
 	if (list.pHead == NULL)
-		list.pHead = list.pTail = pNode;
-	pNode->pNext = list.pHead;
-	list.pHead = pNode;
+		list.pHead = list.pTail = pNODE;
+	pNODE->pNext = list.pHead;
+	list.pHead = pNODE;
 }
 
 void InsertHeadLL(LISTLL& list, LLNV x)
 {
-	NODELL* pNode = GetNodeLL(x);
-	if (pNode == NULL)
+	NODELL* pNODE = GetNODELL(x);
+	if (pNODE == NULL)
 		return;
-	AddHeadLL(list, pNode);
+	AddHeadLL(list, pNODE);
 }
 
-void AddTailLL(LISTLL& list, NODELL* pNode)
+void AddTailLL(LISTLL& list, NODELL* pNODE)
 {
 	if (list.pHead == NULL)
-		list.pHead = list.pTail = pNode;
-	list.pTail->pNext = pNode;
-	list.pTail = pNode;
+		list.pHead = list.pTail = pNODE;
+	list.pTail->pNext = pNODE;
+	list.pTail = pNODE;
+}
+
+void AddTailLL_N(List& list, LLNV x)
+{
+	NODELL* pNODE = GetNODELL(x);
+	if (!list)
+		list = pNODE;
+	else
+	{
+		NODELL* i = list;
+		while (i->pNext)
+		{
+			i = i->pNext;
+		}
+		i->pNext = pNODE;
+		i = pNODE;
+	}
 }
 
 void InsertTailLL(LISTLL& list, LLNV x)
 {
-	NODELL* pNode = GetNodeLL(x);
-	if (pNode == NULL)
+	NODELL* pNODE = GetNODELL(x);
+	if (pNODE == NULL)
 		return;
-	AddTailLL(list, pNode);
+	AddTailLL(list, pNODE);
 }
 
 void InsertTailCC(LISTCC& list, CCNV x)
 {
-	NODECC* pNode = GetNodeCC(x);
-	if (pNode == NULL)
+	NODECC* pNODE = GetNODECC(x);
+	if (pNODE == NULL)
 		return;
 	if (list.pHead == NULL)
-		list.pHead = list.pTail = pNode;
-	list.pTail->pNext = pNode;
-	list.pTail = pNode;
+		list.pHead = list.pTail = pNODE;
+	list.pTail->pNext = pNODE;
+	list.pTail = pNODE;
 }
 
 void SplitList(NODELL* headList, NODELL** leftRef, NODELL** rightRef);
@@ -185,7 +205,6 @@ void FileReaderCC(char* filename, LISTCC& listCC, LISTLL listLL)
 	in.close();
 }
 
-
 void XuatTieuDe()
 {
 	cout << '\n';
@@ -206,17 +225,39 @@ void XuatTieuDe()
 void XuatBangLuongNV(LISTLL listLL)
 {
 	XuatTieuDe();
-	NODELL* iNode = listLL.pHead;
-	while (iNode != NULL)
+	NODELL* iNODE = listLL.pHead;
+	if (listLL.pHead == NULL)
+		return;
+	while (iNODE != NULL)
 	{
 		cout << '\n';
 		cout << setiosflags(ios::left) << " "
-			<< setw(10) << iNode->data.maNV
-			<< setw(19) << iNode->data.hoTen
-			<< setw(9) << setprecision(2) << setiosflags(ios::fixed) << iNode->data.luongCB
-			<< setw(9) << setprecision(2) << setiosflags(ios::fixed) << iNode->data.luongPT
-			<< setw(9) << setprecision(2) << setiosflags(ios::fixed) << iNode->data.luongTL;
-		iNode = iNode->pNext;
+			<< setw(10) << iNODE->data.maNV
+			<< setw(19) << iNODE->data.hoTen
+			<< setw(9) << setprecision(2) << setiosflags(ios::fixed) << iNODE->data.luongCB
+			<< setw(9) << setprecision(2) << setiosflags(ios::fixed) << iNODE->data.luongPT
+			<< setw(9) << setprecision(2) << setiosflags(ios::fixed) << iNODE->data.luongTL;
+		iNODE = iNODE->pNext;
+	}
+	cout << '\n';
+	for (int i = 0; i < 60; i++)
+		cout << '=';
+	cout << '\n';
+}
+
+void XuatBangLuongNV_N(List list)
+{
+	XuatTieuDe();
+	while (list)
+	{
+		cout << '\n';
+		cout << setiosflags(ios::left) << " "
+			<< setw(10) << list->data.maNV
+			<< setw(19) << list->data.hoTen
+			<< setw(9) << setprecision(2) << setiosflags(ios::fixed) << list->data.luongCB
+			<< setw(9) << setprecision(2) << setiosflags(ios::fixed) << list->data.luongPT
+			<< setw(9) << setprecision(2) << setiosflags(ios::fixed) << list->data.luongTL;
+		list = list->pNext;
 	}
 	cout << '\n';
 	for (int i = 0; i < 60; i++)
@@ -244,9 +285,14 @@ void SelectionSort(LISTLL& list)
 // Chức năng chèn một nút mới trong danh sách. 
 // Lưu ý rằng hàm này chờ một con trỏ trỏ tới j
 // vì điều này có thể sửa đổi phần đầu của danh sách liên kết đầu vào (tương tự như push ())
+
+// ============================== SẮP XẾP ====================================
+
+// SELECTION SORT
+
 void SortedInsertion(NODELL** j, NODELL* i)
 {
-	// Trường hợp đặc biệt nếu j rỗng hoặc j là node cuối cùng
+	// Trường hợp đặc biệt nếu j rỗng hoặc j là NODE cuối cùng
 	// Chèn ở vị trí đầu tiên
 	if (*j == NULL || (*j)->data.luongTL >= i->data.luongTL)
 	{
@@ -255,7 +301,7 @@ void SortedInsertion(NODELL** j, NODELL* i)
 	}
 	else
 	{
-		// Xác định node trước điểm chèn
+		// Xác định NODE trước điểm chèn
 		NODELL* k = *j;
 		while (k->pNext != NULL && k->pNext->data.luongTL < i->data.luongTL)
 		{
@@ -271,7 +317,7 @@ void InsertionSort(LISTLL& list)
 	// Khởi tạo danh sách liên kết được sắp xếp
 	NODELL* j = NULL;
 
-	// Duyệt qua danh sách liên kết đã cho và chèn mọi node để sắp xếp
+	// Duyệt qua danh sách liên kết đã cho và chèn mọi NODE để sắp xếp
 	NODELL* i = list.pHead;
 	while (i != NULL)
 	{
@@ -281,36 +327,30 @@ void InsertionSort(LISTLL& list)
 		// Chèn i vào danh sách liên kết được sắp xếp
 		SortedInsertion(&j, i);
 
-		// Cập nhâp i
+		// Cập nhập i
 		i = iNext;
 	}
 	// Cập nhật pHead để trỏ đến danh sách liên kết đã sắp xếp
 	list.pHead = j;
 }
 
-//void BubbleSort(LISTLL& list)
-//{
-//	NODELL* i = list.pHead;
-//	int temp;
-//	while (i->pNext != NULL)	// while (i && i.pNext != NULL)
-//	{
-//		NODELL* j = i->pNext;
-//		while (j != NULL)		// while (j)
-//		{
-//			if (i->data.luongTL > j->data.luongTL)
-//				swap(i->data, j->data);
-//			j = j->pNext;
-//		}
-//		i = i->pNext;
-//	}
-//}
+
+// BUBBLE SORT
 
 void BubbleSort(LISTLL& list)
 {
-	for (NODELL* i = list.pHead; i != NULL; i = i->pNext)
-		for (NODELL* j = i->pNext; j != NULL; j = j->pNext)
+	NODELL* i = list.pHead;
+	while (i->pNext != NULL)	// while (i && i.pNext != NULL)
+	{
+		NODELL* j = i->pNext;
+		while (j != NULL)		// while (j)
+		{
 			if (i->data.luongTL > j->data.luongTL)
 				swap(i->data, j->data);
+			j = j->pNext;
+		}
+		i = i->pNext;
+	}
 }
 
 //void BubbleSort(LISTLL& list)
@@ -330,8 +370,61 @@ void BubbleSort(LISTLL& list)
 //	}
 //}
 
+//void BubbleSort(LISTLL& list)
+//{
+//	for (NODELL* i = list.pHead; i != NULL; i = i->pNext)
+//		for (NODELL* j = i->pNext; j != NULL; j = j->pNext)
+//			if (i->data.luongTL > j->data.luongTL)
+//				swap(i->data, j->data);
+//}
+
+
+// FUNCTION
+
+void Copy(LISTLL& listLL2, LISTLL listLL)
+
+{
+	CreatListLL(listLL2);
+	LLNV x;
+	for (NODELL* i = listLL.pHead; i != NULL; i = i->pNext)
+	{
+		x = i->data;
+		InsertTailLL(listLL2, x);
+	}
+}
+
+void Push(NODELL** head, LLNV data)
+{
+	NODELL* newNODE = (NODELL*)malloc(sizeof(NODELL));
+	newNODE->data = data;
+	newNODE->pNext = *head;
+	*head = newNODE;
+}
+
+// Thêm một NODE mới vào danh sách theo thứ tự tăng dần
+NODELL* InsertNODESorted(LISTLL& list, LLNV x)
+{
+	NODELL* pNODE = GetNODELL(x);
+	NODELL* i = list.pHead;
+	while ((i->pNext != NULL) && (i->pNext->data.luongTL < pNODE->data.luongTL))
+	{
+		i = i->pNext;
+	}
+	pNODE->pNext = i->pNext;
+	i->pNext = pNODE;
+	return pNODE;
+}
+
+
+
+
+// MERGE SORT
+
+// ===============
 // Sắp xếp một danh sách được liên kết nhất định bằng cách sử dụng thuật toán sắp xếp hợp nhất MergeSort
-void MergeSort(NODELL** headList)
+// Cách 1:
+
+void MergeSort(NODELL** headList, LISTLL& list)
 {
 	// Temp 1:
 	// Trường hợp cơ sở - Kích thước 0 hoặc 1
@@ -352,18 +445,19 @@ void MergeSort(NODELL** headList)
 
 	// Sắp xếp đệ quy hai danh sách.
 	// Sắp xếp các danh sách con
-	MergeSort(&left);
-	MergeSort(&right);
+	MergeSort(&left, list);
+	MergeSort(&right, list);
 
 	// Sắp xếp danh sách
 	*headList = SortedMerge(left, right);
+	list.pHead = *headList;
 }
 
 // Chia đôi danh sách thành 2 nửa
 // Nếu kích thước của danh sách là lẻ, thì phần tử phụ sẽ nằm trong danh sách đầu tiên.
 // Hoặc nói cách khác
 // Chia các nút của danh sách đã cho thành các nửa trước và sau và trả về hai danh sách bằng cách sử dụng các tham số tham chiếu.
-// Nếu độ dài là lẻ, nút phụ sẽ nằm trong danh sách phía trước. Nó sử dụng chiến lược con trỏ nhanh / chậm
+// Nếu độ dài là lẻ, nút phụ sẽ nằm trong danh sách phía trước. Nó sử dụng chiến lược con trỏ left / right
 void SplitList(NODELL* headList, NODELL** leftRef, NODELL** rightRef)
 {
 	// Nếu chiều dài nhỏ hơn 2, xử lý riêng
@@ -426,31 +520,252 @@ NODELL* SortedMerge(NODELL* left, NODELL* right)
 	return result;
 }
 
-void Copy(LISTLL& listLL2, LISTLL listLL)
+
+
+// ==============
+// Sắp xếp một danh sách được liên kết nhất định bằng cách sử dụng thuật toán sắp xếp hợp nhất MergeSort
+// Cách 2:
+
+// Trộn 2 danh sách đã sắp xếp thành danh sách sắp xếp
+// Lần lượt kiểm tra 2 phần tử đầu của mỗi danh sách left và right
+// Chọn lấy phần tử có giá trị nhỏ hơn chèn vào cuối danh sách left
+// Thực hiện cho tới khi 1 trong 2 danh sách rỗng
+NODELL* Merge(List left, List right)
 {
-	CreatListLL(listLL2);
-	LLNV x;
-	for (NODELL* i = listLL.pHead; i != NULL; i = i->pNext)
+	if (right == NULL)
+		return left;
+	if (left == NULL)
+		return right;
+	List list = NULL;
+	if (left->data.luongTL < right->data.luongTL)
 	{
-		x = i->data;
-		InsertTailLL(listLL2, x);
+		list = left;
+		list->pNext = Merge(left->pNext, right);
+	}
+	else
+	{
+		list = right;
+		list->pNext = Merge(left, right->pNext);
+	}
+	return list;
+}
+
+// Tìm phần tử middle (phần tử giữa của danh sách liên kết)
+// Dùng 2 NODE để chạy là left và right, trong đó: left nhảy 1 lần và right nhảy 2 lần
+// Khi right trỏ đến NULL (phần tử cuối cùng của danh sách) thì left chính là phần tử middle cần tìm
+NODELL* getMid(List list)
+{
+	if (!list)
+		return list;
+	NODELL* left, * right;
+	left = right = list;
+	while (right->pNext && right->pNext->pNext)
+	{
+		left = left->pNext;
+		right = right->pNext->pNext;
+	}
+	return left;
+}
+
+void Split(List list, List& list1, List& list2)
+{
+	NODELL* mid = getMid(list);
+	list1 = list;
+	list2 = mid->pNext;
+	mid->pNext = NULL;
+}
+
+void mergeSort(List& list, LISTLL& listLL)
+{
+	List left = NULL;
+	List right = NULL;
+
+	// Điều kiện dừng
+	// Danh sách rỗng hoặc danh sách chỉ có 1 NODE
+	if (!list || !list->pNext)
+		return;
+
+	// Tách đôi danh sách cần sắp xếp thành 2 danh sách
+	// Bao gồm 1 danh sách bên trái (left) và 1 danh sách bên phải (right)
+	Split(list, left, right);
+
+	// Gọi đệ quy mergeSort(left)
+	mergeSort(left, listLL);
+	// Gọi đệ quy mergeSort(right)
+	mergeSort(right, listLL);
+
+	// Trộn 2 danh sách left và right lại thành danh sách đã được sắp xếp hoàn chỉnh
+	list = Merge(left, right);
+
+	// Trả về danh sách kết quả hoàn chỉnh
+	listLL.pHead = list;
+}
+
+
+
+// RADIX SORT
+
+#pragma region Demo RadixSort LinkedList
+
+// Hàm trả về số lớn nhất theo điều kiện nhất định (+ hoặc -)
+float Max(LISTLL list)
+{
+	NODELL* i = list.pHead;
+	float max = list.pHead->data.luongTL;
+	while (i != NULL)
+	{
+		if (abs(i->data.luongTL) > max)
+			max = abs(i->data.luongTL);
+		i = i->pNext;
+	}
+	return max;
+}
+
+// Hàm trả về số mũ lũy thừa 10 tương ứng với chữ số có nghĩa nhất
+int Expoment(float max)
+{
+	int count = 0;
+	while (max != NULL)
+	{
+		max /= 10;
+		count++;
+	}
+	return count - 1;
+}
+
+// Hàm trả về độ dài của 1 danh sách liên kết đơn
+int Length(LISTLL list)
+{
+	NODELL* i = list.pHead;
+	int count = 0;
+	while (i != NULL)
+	{
+		i = i->pNext;
+		count++;
+	}
+	return count;
+}
+
+// Hàm trả về phần đầu của một danh sách mới
+NODELL* NewList(void)
+{
+	NODELL* newNODE = NULL;
+	if ((newNODE = (struct NODELL*)malloc(sizeof(NODELL))) == NULL)
+	{
+		cout << "\nError, memory allocation failed.\n";
+		exit(1);
+	}
+	newNODE->pNext = NULL;
+	return newNODE;
+}
+
+// Hàm giải phóng(xóa) toàn bộ danh sách
+void DeleteList(LISTLL& list)
+{
+	NODELL* i = NULL;
+	while (list.pHead != NULL)
+	{
+		i = list.pHead;
+		list.pHead = list.pHead->pNext;
+		free(i);
 	}
 }
 
-//void Copy2(NODELL** head, LISTLL listLL)
-//{
-//	LLNV x;
-//	for (NODELL* i = listLL.pHead; i != NULL; i = i->pNext)
-//	{
-//		x = i->data;
-//		Push(&head, x);
-//	}
-//}
-
-void Push(NODELL** head, LLNV data)
+NODELL* radixSort(LISTLL& list)
 {
-	NODELL* newNode = (NODELL*)malloc(sizeof(NODELL));
-	newNode->data = data;
-	newNode->pNext = *head;
-	*head = newNode;
+	NODELL** ptrArray;
+	NODELL* tempPtr;
+	NODELL* headPtr = list.pHead;
+
+	ptrArray = (struct NODELL**)malloc(sizeof(struct NODELL) * 10);
+
+	for (int i = 0; i < 10; i++)
+	{
+		// Cấp phát cho các nhóm phần tử NODE đầu
+		ptrArray[i] = NewList();
+	}
+	/* help
+	in here */
+	return NULL;
+}
+
+#pragma endregion
+
+// Xác định cơ số
+int CoSo(LISTLL list)
+{
+	NODELL* i = list.pHead;
+	float max = 0;
+	int coSo = 0;
+	while (i != NULL)
+	{
+		if (i->data.luongTL > max)
+			max = i->data.luongTL;
+		i = i->pNext;
+	}
+
+	while (max != 0)
+	{
+		coSo++;
+		max /= 10;
+	}
+	return coSo;
+}
+
+// Xác định thương số
+int ThuongSo_Radix(int number, int k)
+{
+	int du;
+	for (int i = 1; i <= k; i++)
+	{
+		du = number % 10;
+		number /= 10;
+	}
+	return du;
+}
+
+void RadixSort(LISTLL& list)
+{
+	int minCoSo = 1;
+	int maxCoSo = CoSo(list);
+	int soDu;
+
+	// Phần phía sau
+	NODELL* rear[10];
+	// Phần phía trước
+	NODELL* front[10];
+
+	int i;
+	for (int coSo = minCoSo; coSo <= maxCoSo; coSo++)
+	{
+		for (i = 0; i <= 9; i++)
+		{
+			rear[i] = NULL;
+			front[i] = NULL;
+		}
+		for (NODELL* j = list.pHead; j != NULL ; j = j->pNext)
+		{
+			soDu = ThuongSo_Radix(j->data.luongTL, coSo);
+			if (front[soDu] == NULL)
+				front[soDu] = j;
+			else
+				rear[soDu]->pNext = j;
+			rear[soDu] = j;
+		}
+		i = 0;
+		while (front[i] == NULL)
+		{
+			i++;
+		}
+		list.pHead = front[i];
+		while (i < 9)
+		{
+			if (rear[i + 1] != NULL)
+				rear[i]->pNext = front[i + 1];
+			else
+				rear[i + 1] = rear[i];
+			i++;
+		}
+		rear[9]->pNext = NULL;
+	}
 }

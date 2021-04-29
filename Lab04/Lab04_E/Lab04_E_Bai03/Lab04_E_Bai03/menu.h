@@ -30,6 +30,7 @@ int ChonMenu(int soMenu)
 void XuLyMenu(int menu, LISTLL& listLL, LISTCC& listCC)
 {
 	LISTLL listLL2;
+	List head;
 	char filenameLL[100] = "llnv.txt";
 	char filenameCC[100] = "chamcong.txt";
 	int ketQua, x;
@@ -91,22 +92,29 @@ void XuLyMenu(int menu, LISTLL& listLL, LISTCC& listCC)
 		Copy(listLL2, listLL);
 		XuatBangLuongNV(listLL2);
 		cout << "\n\tBANG LUONG NHAN VIEN SAU KHI SAP XEP";
-		NODELL* head;
-		LLNV x;
+		//head = NULL;
+		head = listLL2.pHead;
+		/*LLNV x;
 		for (NODELL* i = listLL.pHead; i != NULL; i = i->pNext)
 		{
 			x = i->data;
 			Push(&head, x);
-		}
-		MergeSort(&head);
+		}*/
+		mergeSort(head, listLL2);
+		//XuatBangLuongNV_N(head);
 		XuatBangLuongNV(listLL2);
 		break;
 	case 7:
 		system("cls");
 		cout << "\n7. Sap xep bang luong nhan vien - RadixSort";
-		break;
-	default:
+		cout << "\n\tBANG LUONG NHAN VIEN TRUOC KHI SAP XEP";
+		Copy(listLL2, listLL);
+		XuatBangLuongNV(listLL2);
+		cout << "\n\tBANG LUONG NHAN VIEN SAU KHI SAP XEP";
+		RadixSort(listLL2);
+		XuatBangLuongNV(listLL2);
 		break;
 	}
+	head = NULL;
 	_getch();
 }
