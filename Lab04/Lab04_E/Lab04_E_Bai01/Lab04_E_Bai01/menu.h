@@ -124,7 +124,7 @@ void XuLyMenu(int menu, LIST& list)
 		Copy(list2, list);
 		Output(list2);
 		cout << "\nDanh sach sau khi sap xep...";
-		SelectionSortIncrease(list2);
+		InsertionSortIncrease(list2);
 		Output(list2);
 		break;
 	case 10:

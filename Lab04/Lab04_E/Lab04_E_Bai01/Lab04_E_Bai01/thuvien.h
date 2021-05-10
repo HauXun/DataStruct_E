@@ -1,4 +1,4 @@
-#define MAX 100
+﻿#define MAX 100
 
 typedef int DaySo[MAX];
 
@@ -173,7 +173,7 @@ void DemSLXH(LIST& list)
 	LIST listResult;
 	CreatList(listResult);
 	DifElement(list, listResult);
-	int count;
+	int count = 0;
 	for (NODE* i = listResult.pHead; i != NULL; i = i->pNext)
 	{
 		int x = i->data;
@@ -185,34 +185,92 @@ void DemSLXH(LIST& list)
 	}
 }
 
-void SelectionSortIncrease(LIST& list)
+void SortedInsertionIncrease(NODE** j, NODE* i)
 {
-	NODE* csMin;
-	for (NODE* i = list.pHead; i != list.pTail; i = i->pNext)
+	// Trường hợp đặc biệt nếu j rỗng hoặc j là NODE cuối cùng
+	// Chèn ở vị trí đầu tiên
+	if (*j == NULL || (*j)->data >= i->data)
 	{
-		csMin = i;
-		for (NODE* j = i->pNext; j != NULL; j = j->pNext)
+		i->pNext = *j;
+		*j = i;
+	}
+	else
+	{
+		// Xác định NODE trước điểm chèn
+		NODE* k = *j;
+		while (k->pNext != NULL && k->pNext->data < i->data)
 		{
-			if (j->data < csMin->data)
-				csMin = j;
+			k = k->pNext;
 		}
-		swap(csMin->data, i->data);
+		i->pNext = k->pNext;
+		k->pNext = i;
 	}
 }
 
-void SelectionSortDecrease(LIST& list)
+void SortedInsertionDecrease(NODE** j, NODE* i)
 {
-	NODE* csMax;
-	for (NODE* i = list.pHead; i != list.pTail; i = i->pNext)
+	// Trường hợp đặc biệt nếu j rỗng hoặc j là NODE cuối cùng
+	// Chèn ở vị trí đầu tiên
+	if (*j == NULL || (*j)->data <= i->data)
 	{
-		csMax = i;
-		for (NODE* j = i->pNext; j != NULL; j = j->pNext)
-		{
-			if (j->data > csMax->data)
-				csMax = j;
-		}
-		swap(csMax->data, i->data);
+		i->pNext = *j;
+		*j = i;
 	}
+	else
+	{
+		// Xác định NODE trước điểm chèn
+		NODE* k = *j;
+		while (k->pNext != NULL && k->pNext->data > i->data)
+		{
+			k = k->pNext;
+		}
+		i->pNext = k->pNext;
+		k->pNext = i;
+	}
+}
+
+void InsertionSortIncrease(LIST& list)
+{
+	// Khởi tạo danh sách liên kết được sắp xếp
+	NODE* j = NULL;
+
+	// Duyệt qua danh sách liên kết đã cho và chèn mọi NODE để sắp xếp
+	NODE* i = list.pHead;
+	while (i != NULL)
+	{
+		// Xác định lại pNext cho lần lặp tiếp theo
+		NODE* iNext = i->pNext;
+
+		// Chèn i vào danh sách liên kết được sắp xếp
+		SortedInsertionIncrease(&j, i);
+
+		// Cập nhập i
+		i = iNext;
+	}
+	// Cập nhật pHead để trỏ đến danh sách liên kết đã sắp xếp
+	list.pHead = j;
+}
+
+void InsertionSortDecrease(LIST& list)
+{
+	// Khởi tạo danh sách liên kết được sắp xếp
+	NODE* j = NULL;
+
+	// Duyệt qua danh sách liên kết đã cho và chèn mọi NODE để sắp xếp
+	NODE* i = list.pHead;
+	while (i != NULL)
+	{
+		// Xác định lại pNext cho lần lặp tiếp theo
+		NODE* iNext = i->pNext;
+
+		// Chèn i vào danh sách liên kết được sắp xếp
+		SortedInsertionDecrease(&j, i);
+
+		// Cập nhập i
+		i = iNext;
+	}
+	// Cập nhật pHead để trỏ đến danh sách liên kết đã sắp xếp
+	list.pHead = j;
 }
 
 void PositiveElementList(LIST list, LIST& posList)
@@ -243,11 +301,11 @@ void Sort(LIST& list)
 {
 	LIST posList;
 	PositiveElementList(list, posList);
-	SelectionSortIncrease(posList);
+	InsertionSortIncrease(posList);
 
 	LIST negList;
 	NegativeElementList(list, negList);
-	SelectionSortDecrease(negList);
+	InsertionSortDecrease(negList);
 
 	LIST zeroList;
 	ZeroElementList(list, zeroList);
