@@ -5,8 +5,9 @@
 
 using namespace std;
 
-#include "Thuvien.h"
-#include "Menu.h"
+#include "header.h"
+#include "thuvien.h"
+#include "menu.h"
 
 void ChayChuongTrinh()
 {
