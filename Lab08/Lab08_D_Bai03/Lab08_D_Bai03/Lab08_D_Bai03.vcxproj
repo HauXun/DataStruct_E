@@ -141,6 +141,9 @@
   <ItemGroup>
     <ClCompile Include="Lab08_D_Bai03.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="thuvien.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
