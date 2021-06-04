@@ -15,15 +15,18 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="2011379_TrieuTronHau_BT1.cpp">
+    <ClCompile Include="2011379_TrieuTrongHau_KTTCK.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="2011379_thuvien.h">
+    <ClInclude Include="2011379_Header.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="2011379_menu.h">
+    <ClInclude Include="2011379_Menu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="2011379_Thuvien.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

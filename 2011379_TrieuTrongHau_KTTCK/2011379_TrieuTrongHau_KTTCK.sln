@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2011379_TrieuTrongHau_KTTCK", "2011379_TrieuTrongHau_KTTCK\2011379_TrieuTrongHau_KTTCK.vcxproj", "{BDD6DA4B-D716-4A43-BF29-67BE63015E8E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BDD6DA4B-D716-4A43-BF29-67BE63015E8E}.Debug|x64.ActiveCfg = Debug|x64
+		{BDD6DA4B-D716-4A43-BF29-67BE63015E8E}.Debug|x64.Build.0 = Debug|x64
+		{BDD6DA4B-D716-4A43-BF29-67BE63015E8E}.Debug|x86.ActiveCfg = Debug|Win32
+		{BDD6DA4B-D716-4A43-BF29-67BE63015E8E}.Debug|x86.Build.0 = Debug|Win32
+		{BDD6DA4B-D716-4A43-BF29-67BE63015E8E}.Release|x64.ActiveCfg = Release|x64
+		{BDD6DA4B-D716-4A43-BF29-67BE63015E8E}.Release|x64.Build.0 = Release|x64
+		{BDD6DA4B-D716-4A43-BF29-67BE63015E8E}.Release|x86.ActiveCfg = Release|Win32
+		{BDD6DA4B-D716-4A43-BF29-67BE63015E8E}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F19CD6E9-8877-462C-9198-19F1A7C3074F}
+	EndGlobalSection
+EndGlobal
