@@ -30,7 +30,6 @@ void ChayChuongTrinh()
 
 int main()
 {
-	//NghiemTucMode();
 	BinhThuongMode();
 	/*wstring str = L"Có súng đây nè";
 	wcout << str;*/
